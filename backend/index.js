@@ -1,9 +1,11 @@
 import express from 'express'
 import {createTodo} from './types.js'
+import cors from 'cors'
 import todo from './db.js'
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.post('/todo',async (req, res)=>{
     const createPayload =  req.body;
@@ -25,7 +27,7 @@ app.post('/todo',async (req, res)=>{
 })
 app.get('/todos',async (req, res)=>{
     const todos = await todo.find({})
-    console.log(todos);
+    // console.log(todos);
     res.json({todos})
 })
 app.put('/completed',async(req, res)=>{
